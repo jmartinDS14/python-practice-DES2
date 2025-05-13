@@ -7,4 +7,5 @@ data = response.json()
 
 id = [item.get('id') for item in data]
 
-print(id)
+for i in id:
+    print(i)

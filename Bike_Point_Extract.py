@@ -8,33 +8,28 @@ response = requests.get(url)
 if response.status_code==200:
     #save the json response into a data variable
     data = response.json()
-    id = [item.get('id') for item in data]
+    number_of_bike_points = len([item.get('id') for item in data])
 
-    for bp in id:
-        endpoint = url + '/' + bp
-        endpoint_response = requests.get(endpoint)
-        endpoint_data = endpoint_response.json()
-    
-        #get modified timestamp to help us name our file
-        first_value = endpoint_data['additionalProperties'][0]
+    for i in range(0,number_of_bike_points):
+        bike_point = data[i]
+
+        first_value = bike_point['additionalProperties'][0]
         modified = first_value.get('modified')
         modified = modified.replace(':','-')
         modified = modified.replace('.','-')
-        #print(modified)
 
-        file_list = [f for f in os.listdir('.') if f.endswith('.json')]
-        #print(file_list)
+        bp = bike_point.get('id')
 
         filename = modified+bp+'.json'
-        #print(filename)
+
+        file_list = [f for f in os.listdir('.') if f.endswith('.json')]
 
         if filename in file_list:
-            print('Up to date')
+                print(bp+' up to date')
         else:
             #save to a file
             with open(filename,'w') as file:
-                json.dump(endpoint_data,file)
-
+                json.dump(bike_point,file)
 else:
     #this bit goes and gets a cleaner error message
     data = response.json()
