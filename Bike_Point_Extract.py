@@ -10,6 +10,7 @@ load_dotenv()
 access_key = os.getenv('AWS_ACCESS_KEY')
 secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 bucket = os.getenv('AWS_BUCKET_NAME')
+print("Bucket:", bucket)
 
 s3_client = boto3.client(
     's3',
