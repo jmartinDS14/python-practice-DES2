@@ -1,9 +1,9 @@
 name: run Bike_Point_Extract.py
 
-on:
-  schedule:
-#    - cron: '55 12 * * *' 
-  workflow_dispatch:
+# on:
+#   schedule:
+# #    - cron: '55 12 * * *' 
+#   workflow_dispatch:
 
 jobs:
   build:
